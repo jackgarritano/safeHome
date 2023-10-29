@@ -19,6 +19,7 @@ export default function StairsData() {
 		handle_bar_exists: false,
 		room_brightness: 10,
 		clear_path_to_light_exists: false,
+        easy_flashlight_placement_exists: false,
 		handrails_exists: false,
 		even_steps_exists: false,
 		adequate_lighting_exists: false,
@@ -119,6 +120,10 @@ export default function StairsData() {
                         <FormControlLabel
 							control={<Checkbox checked={formData.clear_path_to_light_exists} onChange={handleCheckboxChange} name="clear_path_to_light_exists" />}
 							label="The flashlights are in easy-to-find places in case of power outages."
+						/>
+                        <FormControlLabel
+							control={<Checkbox checked={formData.easy_flashlight_placement_exists} onChange={handleCheckboxChange} name="easy_flashlight_placement_exists" />}
+							label="There is a lamp within reach of your bed in case you need to get up in the middle of the night."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.handrails_exists} onChange={handleCheckboxChange} name="handrails_exists" />}
