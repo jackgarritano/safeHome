@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
-import { insertBedroomData } from '../utils/db';
+import { insertRoomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import useQueryParam from '../utils/useQueryParam';
@@ -56,7 +56,7 @@ export default function BedroomData() {
     // Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertBedroomData(supabase, formData, houseId);
+		insertRoomData(supabase, formData, houseId, 'bedrooms');
 	};
 
 
