@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
-import { insertOnboardingData } from '../utils/db';
+import { insertRoomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
-
+import useQueryParam from '../utils/useQueryParam';
 
 
 
 export default function BathroomData() {
 	const {authenticated, userId} = useAuthentication();
+	const houseId = useQueryParam('house_id');
 	const location = useLocation();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ export default function BathroomData() {
     // Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertHouseData(supabase, formData, userId);
+		insertRoomData(supabase, formData, houseId, 'bathrooms');
 	};
 
 
