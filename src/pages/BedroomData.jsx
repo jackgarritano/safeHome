@@ -1,19 +1,21 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
-import { insertOnboardingData } from '../utils/db';
+import { insertBedroomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
+import useQueryParam from '../utils/useQueryParam';
 
 
 
 
 export default function BedroomData() {
-	const {authenticated, userId} = useAuthentication();
+	const {authenticated} = useAuthentication();
+	const houseId = useQueryParam('house_id');
 	const location = useLocation();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
-		name: '',
+		room_name: '',
 		trip_item_exists: false,
 		sharp_corner_exists: false,
 		handle_bar_exists: false,
@@ -47,14 +49,14 @@ export default function BedroomData() {
 	const handleCheckboxChange = (event) => {
 		const { name, checked } = event.target;
 		setFormData((prevFormData) => {
-			return { ...prevFormData,  ...prevFormData, [name]: checked }
+			return { ...prevFormData, [name]: checked }
 		});
 	};
 
     // Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertHouseData(supabase, formData, userId);
+		insertBedroomData(supabase, formData, houseId);
 	};
 
 
@@ -74,8 +76,8 @@ export default function BedroomData() {
 					margin="normal"
 					label="Room Name"
 					variant="outlined"
-					name="name"
-					value={formData.name}
+					name="room_name"
+					value={formData.room_name}
 					onChange={handleInputChange}
 				/>
 				<br></br>
@@ -115,7 +117,7 @@ export default function BedroomData() {
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.handle_bar_exists} onChange={handleCheckboxChange} name="handle_bar_exists" />}
-							label="There are handlebar/rails that the elderly can hold on to."
+							label="There are handlebars/rails that the elderly can hold on to."
                         />
                         <FormControlLabel
 							control={<Checkbox checked={formData.clear_path_to_light_exists} onChange={handleCheckboxChange} name="clear_path_to_light_exists" />}
