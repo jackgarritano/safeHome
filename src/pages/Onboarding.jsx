@@ -6,6 +6,7 @@ export default function Onboarding() {
 
 
 	const [formData, setFormData] = useState({
+		name: '',
 		age: '',
 		mobility: 0,
 		impairments: {
@@ -14,14 +15,13 @@ export default function Onboarding() {
 			historyOfFalls: false,
 			assistiveDevices: false,
 			incontinence: false,
-		},
-		budget: '',
+		}
 	});
 
 	// Handler for inputs change
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
-		setFormData((prevFormData) =>{
+		setFormData((prevFormData) => {
 			return { ...prevFormData, [name]: value };
 		});
 	};
@@ -55,6 +55,21 @@ export default function Onboarding() {
 				<h2>Onboarding</h2>
 				<br></br>
 				<Typography gutterBottom variant="body1">
+					What is your name?
+				</Typography>
+				{/* Name Input */}
+				<TextField
+					fullWidth
+					margin="normal"
+					label="Name"
+					variant="outlined"
+					name="age"
+					value={formData.age}
+					onChange={handleInputChange}
+				/>
+				<br></br>
+				<br></br>
+				<Typography gutterBottom variant="body1">
 					What is your age?
 				</Typography>
 				{/* Age Input */}
@@ -82,6 +97,42 @@ export default function Onboarding() {
 						min={1}
 						max={10}
 						name="mobility"
+						value={formData.mobility}
+						onChange={handleSliderChange}
+					/>
+				</Box>
+
+				{/* Eyesight Slider */}
+				<Box sx={{ my: 2 }}>
+					<Typography gutterBottom variant="body1">
+						What is your level of eyesight?
+					</Typography>
+					<Slider
+						aria-label="Eyesight Level"
+						valueLabelDisplay="auto"
+						step={1}
+						marks
+						min={1}
+						max={10}
+						name="eyesight"
+						value={formData.mobility}
+						onChange={handleSliderChange}
+					/>
+				</Box>
+
+				{/* Mobility Slider */}
+				<Box sx={{ my: 2 }}>
+					<Typography gutterBottom variant="body1">
+						What is your level of muscle strength?
+					</Typography>
+					<Slider
+						aria-label="Muscle Strength"
+						valueLabelDisplay="auto"
+						step={1}
+						marks
+						min={1}
+						max={10}
+						name="strength"
 						value={formData.mobility}
 						onChange={handleSliderChange}
 					/>
