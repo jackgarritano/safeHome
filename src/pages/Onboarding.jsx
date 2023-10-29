@@ -7,7 +7,8 @@ import useAuthentication from "../hooks/useAuthentication";
 
 
 export default function Onboarding() {
-	const authenticated = useAuthentication();
+	const {authenticated, userId} = useAuthentication();
+	console.log('userid', userId);
 	const location = useLocation();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
@@ -22,9 +23,6 @@ export default function Onboarding() {
 			incontinence: false,
 		}
 	});
-
-	const query = new URLSearchParams(location.search);
-	const id = query.get('id');
 
 	// Handler for inputs change
 	const handleInputChange = (event) => {
@@ -53,7 +51,7 @@ export default function Onboarding() {
 	// Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertOnboardingData(supabase, formData, id);
+		insertOnboardingData(supabase, formData, userId);
 	};
 
 	// Now we build the form UI
@@ -72,8 +70,8 @@ export default function Onboarding() {
 					margin="normal"
 					label="Name"
 					variant="outlined"
-					name="age"
-					value={formData.age}
+					name="name"
+					value={formData.name}
 					onChange={handleInputChange}
 				/>
 				<br></br>

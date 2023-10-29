@@ -5,6 +5,7 @@ import SupabaseContext from '../components/SupabaseContext';
 export default function useAuthentication() {
 	const supabase = useContext(SupabaseContext);
 	const [authenticated, setAuthenticated] = useState(false);
+	const [userId, setUserId] = useState(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -13,12 +14,13 @@ export default function useAuthentication() {
 			const {data: { session }, error} = await supabase.auth.getSession();
 			if (session) {
 				setAuthenticated(true);
+				return session.user.id;
 			} else {
 				// If not authenticated, redirect to the login page
 				navigate('/auth');
 			}
 		}
-		checkCurrentSession();
+		checkCurrentSession().then(res => setUserId(res));
 		
 		// Set up a subscription to auth changes
 		const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -35,5 +37,5 @@ export default function useAuthentication() {
 		};
 	}, []);
 
-	return { authenticated };
+	return { authenticated, userId };
 }
