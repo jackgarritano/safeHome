@@ -123,10 +123,6 @@ export default function LivingRoomData() {
 							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.easy_flashlight_placement_exists} onChange={handleCheckboxChange} name="easy_flashlight_placement_exists" />}
-							label="There is a lamp within reach of your bed in case you need to get up in the middle of the night."
-						/>
-						<FormControlLabel
 							control={<Checkbox checked={formData.furniture_out_of_traffic_exists} onChange={handleCheckboxChange} name="furniture_out_of_traffic_exists" />}
 							label="Coffee tables, magazine racks, plant stands, and other furniture pieces are out of high-traffic areas."
                         />

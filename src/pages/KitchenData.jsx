@@ -122,10 +122,6 @@ export default function KitchenData() {
 							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.easy_flashlight_placement_exists} onChange={handleCheckboxChange} name="easy_flashlight_placement_exists" />}
-							label="There is a lamp within reach of your bed in case you need to get up in the middle of the night."
-						/>
-						<FormControlLabel
 							control={<Checkbox checked={formData.reachable_kitchen_items_exists} onChange={handleCheckboxChange} name="reachable_kitchen_items_exists" />}
 							label="All kitchen items used regularly are within easy reach."
                         />
