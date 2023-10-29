@@ -1,17 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
-import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import { RadioGroup, Radio } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import useQueryParam from '../utils/useQueryParam';
 
 
 
 
 export default function RoomRedict() {
 	const {authenticated, userId} = useAuthentication();
-	const location = useLocation();
-	const supabase = useContext(SupabaseContext);
+	const navigate = useNavigate();
+	const houseId = useQueryParam('id');
 	const [formData, setFormData] = useState({
 		type_room: '',
 	});
@@ -27,7 +28,26 @@ export default function RoomRedict() {
     // Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertHouseData(supabase, formData, userId);
+		console.log('type_room', formData.type_room);
+		switch(formData.type_room){
+			case "Bedroom":
+				navigate(`/bedroomdata?house_id=${houseId}`);
+				break;
+			case "Kitchen":
+				navigate(`/kitchendata?house_id=${houseId}`);
+				break;
+			case "Living Room":
+				navigate(`/livingroomdata?house_id=${houseId}`);
+				break;
+			case "Bathroom":
+				navigate(`/bathroomdata?house_id=${houseId}`);
+				break;
+			case "Stairs":
+				navigate(`/stairsdata?house_id=${houseId}`);
+				break;
+			default:
+				navigate(`/house?house_id=${houseId}`);
+		}
 	};
 
 
@@ -46,7 +66,7 @@ export default function RoomRedict() {
                 <RadioGroup
                     aria-label="type_room"
                     name="type_room"
-                    value={formData.type_house}
+                    value={formData.type_room}
                     onChange={handleInputChange}
                 >
                     <FormControlLabel value="Bedroom" control={<Radio />} label="Bedroom" />

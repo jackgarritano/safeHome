@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function House() {
 	const { authenticated } = useAuthentication();
 	const houseId = useQueryParam('id');
+	const navigate = useNavigate();
 
 	const containerStyles = {
 		minHeight: '100%', // covers the full height of its parent, you can also use '100vh' for full viewport height
