@@ -42,7 +42,7 @@ create table "public"."houses" (
     "num_people" bigint not null,
     "num_elderly" bigint not null,
     "type_house" text not null,
-    "temp" text not null,
+    "temp" bigint not null,
     "num_floors" bigint not null,
     "user_id" uuid not null
 );
