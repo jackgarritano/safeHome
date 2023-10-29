@@ -123,10 +123,6 @@ export default function BathroomData() {
 							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.easy_flashlight_placement_exists} onChange={handleCheckboxChange} name="easy_flashlight_placement_exists" />}
-							label="There is a lamp within reach of your bed in case you need to get up in the middle of the night."
-						/>
-						<FormControlLabel
 							control={<Checkbox checked={formData.nonslip_mats_exists} onChange={handleCheckboxChange} name="nonslip_mats_exists" />}
 							label="There are nonslip mats both inside and outside of the shower stalls/bathtub."
                         />
