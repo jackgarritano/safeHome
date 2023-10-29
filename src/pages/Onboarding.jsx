@@ -8,7 +8,6 @@ import useAuthentication from "../hooks/useAuthentication";
 
 export default function Onboarding() {
 	const {authenticated, userId} = useAuthentication();
-	console.log('userid', userId);
 	const location = useLocation();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
