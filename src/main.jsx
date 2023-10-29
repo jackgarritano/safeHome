@@ -12,6 +12,7 @@ import Onboarding from './pages/Onboarding.jsx';
 import BedroomData from './pages/BedroomData.jsx';
 import KitchenData from './pages/KitchenData.jsx';
 import LivingRoomData from './pages/LivingRoomData.jsx';
+import BathroomData from './pages/BathroomData.jsx';
 import Auth from './pages/Auth.jsx';
 import Main from './pages/Main.jsx';
 import SupabaseContext, {supabase} from './components/SupabaseContext.jsx';
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
 	{
 		path: "livingroomdata",
 		element: <LivingRoomData />,
+	},
+	{
+		path: "bathroomdata",
+		element: <BathroomData />,
 	}
 ]);
 
