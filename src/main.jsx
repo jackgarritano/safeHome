@@ -14,6 +14,7 @@ import KitchenData from './pages/KitchenData.jsx';
 import LivingRoomData from './pages/LivingRoomData.jsx';
 import BathroomData from './pages/BathroomData.jsx';
 import StairsData from './pages/StairsData.jsx';
+import RoomRedict from './pages/RoomRedirect.jsx';
 import Auth from './pages/Auth.jsx';
 import Main from './pages/Main.jsx';
 import SupabaseContext, {supabase} from './components/SupabaseContext.jsx';
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
 	{
 		path: "stairsdata",
 		element: <StairsData />,
+	},
+	{
+		path: "roomredirect",
+		element: <RoomRedict />,
 	}
 ]);
 
