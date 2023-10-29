@@ -6,10 +6,15 @@ import {
 	Navigate
 } from "react-router-dom";
 import App from './App.jsx';
+import Onboarding from './pages/Onboarding.jsx';
 import Auth from './pages/Auth.jsx';
 import Main from './pages/Main.jsx';
 import SupabaseContext, {supabase} from './components/SupabaseContext.jsx';
 import './index.css'
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const router = createBrowserRouter([
 	{
@@ -26,23 +31,23 @@ const router = createBrowserRouter([
 	},
 	// {
 	// 	path: "house",
-	// 	element: <Contact />,
+	// 	element: <House />,
 	// },
 	// {
 	// 	path: "room",
-	// 	element: <Contact />,
+	// 	element: <Room />,
 	// },
-	// {
-	// 	path: "onboarding",
-	// 	element: <Contact />,
-	// },
+	{
+		path: "onboarding",
+		element: <Onboarding />,
+	},
 	// {
 	// 	path: "housedata",
-	// 	element: <Contact />,
+	// 	element: <HouseData />,
 	// },
 	// {
 	// 	path: "roomdata",
-	// 	element: <Contact />,
+	// 	element: <RoomData />,
 	// },
 ]);
 

@@ -1,7 +1,7 @@
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '@supabase/supabase-js'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import SupabaseContext from './Components/SupabaseContext'
+import SupabaseContext from './components/SupabaseContext'
 import './App.css'
 
 function App() {
