@@ -5,14 +5,14 @@ import { insertRoomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import useQueryParam from '../utils/useQueryParam';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function BedroomData() {
-	const {authenticated} = useAuthentication();
+	const { authenticated } = useAuthentication();
 	const houseId = useQueryParam('house_id');
-	const location = useLocation();
+	const navigate = useNavigate();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
 		room_name: '',
@@ -21,7 +21,7 @@ export default function BedroomData() {
 		handle_bar_exists: false,
 		room_brightness: 10,
 		clear_path_to_light_exists: false,
-        easy_flashlight_placement_exists: false,
+		easy_flashlight_placement_exists: false,
 		lamp_within_reach_exists: false,
 		lit_bed_to_bath_exists: false,
 		secured_carpets_exists: false,
@@ -37,15 +37,15 @@ export default function BedroomData() {
 		});
 	};
 
-    // Handler for slider change
+	// Handler for slider change
 	const handleSliderChange = (fieldName) => (event, newValue) => {
 		setFormData((prevFormData) => ({
-		  ...prevFormData,
-		  [fieldName]: newValue,  // dynamic field name
+			...prevFormData,
+			[fieldName]: newValue,  // dynamic field name
 		}));
-	  };
+	};
 
-    // Handler for checkbox change
+	// Handler for checkbox change
 	const handleCheckboxChange = (event) => {
 		const { name, checked } = event.target;
 		setFormData((prevFormData) => {
@@ -53,17 +53,18 @@ export default function BedroomData() {
 		});
 	};
 
-    // Handler for form submission
+	// Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertRoomData(supabase, formData, houseId, 'bedrooms');
+		insertRoomData(supabase, formData, houseId, 'bedrooms')
+			.then(res => navigate(`/house?id=${houseId}`));
 	};
 
 
 	// Now we build the form UI
 	return (
 		<Box sx={{ m: 4 }}>
-			
+
 			<form onSubmit={handleSubmit}>
 				<h2>Bedroom Info</h2>
 				{/* <br></br> */}
@@ -83,7 +84,7 @@ export default function BedroomData() {
 				<br></br>
 				<br></br>
 
-                {/* Mobility Slider */}
+				{/* Mobility Slider */}
 				<Box sx={{ my: 2 }}>
 					<Typography gutterBottom variant="body1">
 						How bright is the room?
@@ -118,8 +119,8 @@ export default function BedroomData() {
 						<FormControlLabel
 							control={<Checkbox checked={formData.handle_bar_exists} onChange={handleCheckboxChange} name="handle_bar_exists" />}
 							label="There are handlebars/rails that the elderly can hold on to."
-                        />
-                        <FormControlLabel
+						/>
+						<FormControlLabel
 							control={<Checkbox checked={formData.clear_path_to_light_exists} onChange={handleCheckboxChange} name="clear_path_to_light_exists" />}
 							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
@@ -130,8 +131,8 @@ export default function BedroomData() {
 						<FormControlLabel
 							control={<Checkbox checked={formData.lamp_within_reach_exists} onChange={handleCheckboxChange} name="lamp_within_reach_exists" />}
 							label="The path from the bed to the bathroom is well-lit for safe navigation at night."
-                        />
-                        <FormControlLabel
+						/>
+						<FormControlLabel
 							control={<Checkbox checked={formData.lit_bed_to_bath_exists} onChange={handleCheckboxChange} name="lit_bed_to_bath_exists" />}
 							label="All carpets and area rugs are secured to the floor to prevent slips or trips."
 						/>
@@ -142,7 +143,7 @@ export default function BedroomData() {
 						<FormControlLabel
 							control={<Checkbox checked={formData.bed_telephone_access_exists} onChange={handleCheckboxChange} name="bed_telephone_access_exists" />}
 							label="There are trip hazards between the bed and the bathroom or closet."
-                        />
+						/>
 					</FormGroup>
 				</FormControl>
 

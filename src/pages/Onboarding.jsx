@@ -4,11 +4,11 @@ import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextFie
 import { insertOnboardingData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Onboarding() {
-	const {authenticated, userId} = useAuthentication();
-	const location = useLocation();
+	const { authenticated, userId } = useAuthentication();
+	const navigate = useNavigate();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
 		name: '',
@@ -42,21 +42,22 @@ export default function Onboarding() {
 	// Handler for slider change
 	const handleSliderChange = (fieldName) => (event, newValue) => {
 		setFormData((prevFormData) => ({
-		  ...prevFormData,
-		  [fieldName]: newValue,  // dynamic field name
+			...prevFormData,
+			[fieldName]: newValue,  // dynamic field name
 		}));
-	  };
+	};
 
 	// Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertOnboardingData(supabase, formData, userId);
+		insertOnboardingData(supabase, formData, userId)
+			.then(res => navigate(`/main`));
 	};
 
 	// Now we build the form UI
 	return (
 		<Box sx={{ m: 4 }}>
-			
+
 			<form onSubmit={handleSubmit}>
 				<h2>Onboarding</h2>
 				<br></br>

@@ -5,13 +5,13 @@ import { insertRoomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import useQueryParam from '../utils/useQueryParam';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function BathroomData() {
 	const {authenticated, userId} = useAuthentication();
 	const houseId = useQueryParam('house_id');
-	const location = useLocation();
+	const navigate = useNavigate();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
 		room_name: '',
@@ -55,7 +55,8 @@ export default function BathroomData() {
     // Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertRoomData(supabase, formData, houseId, 'bathrooms');
+		insertRoomData(supabase, formData, houseId, 'bathrooms')
+			.then(res => navigate(`/house?id=${houseId}`));
 	};
 
 

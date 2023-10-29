@@ -5,13 +5,13 @@ import { insertRoomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import useQueryParam from '../utils/useQueryParam';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function LivingRoomData() {
-	const {authenticated, userId} = useAuthentication();
+	const { authenticated, userId } = useAuthentication();
 	const houseId = useQueryParam('house_id');
-	const location = useLocation();
+	const navigate = useNavigate();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
 		room_name: '',
@@ -20,12 +20,12 @@ export default function LivingRoomData() {
 		handle_bar_exists: false,
 		room_brightness: 10,
 		clear_path_to_light_exists: false,
-        easy_flashlight_placement_exists: false,
+		easy_flashlight_placement_exists: false,
 		furniture_out_of_traffic_exists: false,
 		easy_access_main_seating_exists: false,
 		secured_electrical_cords_exists: false,
-        adequate_lighting_exists: false,
-        clutter_lead_to_fall_exists: false
+		adequate_lighting_exists: false,
+		clutter_lead_to_fall_exists: false
 	});
 
 	// Handler for inputs change
@@ -36,33 +36,34 @@ export default function LivingRoomData() {
 		});
 	};
 
-    // Handler for slider change
+	// Handler for slider change
 	const handleSliderChange = (fieldName) => (event, newValue) => {
 		setFormData((prevFormData) => ({
-		  ...prevFormData,
-		  [fieldName]: newValue,  // dynamic field name
+			...prevFormData,
+			[fieldName]: newValue,  // dynamic field name
 		}));
-	  };
+	};
 
-    // Handler for checkbox change
+	// Handler for checkbox change
 	const handleCheckboxChange = (event) => {
 		const { name, checked } = event.target;
 		setFormData((prevFormData) => {
-			return { ...prevFormData,  ...prevFormData, [name]: checked }
+			return { ...prevFormData, ...prevFormData, [name]: checked }
 		});
 	};
 
-    // Handler for form submission
+	// Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertRoomData(supabase, formData, houseId, 'living_rooms');
+		insertRoomData(supabase, formData, houseId, 'living_rooms')
+			.then(res => navigate(`/house?id=${houseId}`));
 	};
 
 
 	// Now we build the form UI
 	return (
 		<Box sx={{ m: 4 }}>
-			
+
 			<form onSubmit={handleSubmit}>
 				<h2>Living Room Info</h2>
 				{/* <br></br> */}
@@ -82,7 +83,7 @@ export default function LivingRoomData() {
 				<br></br>
 				<br></br>
 
-                {/* Mobility Slider */}
+				{/* Mobility Slider */}
 				<Box sx={{ my: 2 }}>
 					<Typography gutterBottom variant="body1">
 						How bright is the room?
@@ -117,16 +118,16 @@ export default function LivingRoomData() {
 						<FormControlLabel
 							control={<Checkbox checked={formData.handle_bar_exists} onChange={handleCheckboxChange} name="handle_bar_exists" />}
 							label="There are handlebar/rails that the elderly can hold on to."
-                        />
-                        <FormControlLabel
+						/>
+						<FormControlLabel
 							control={<Checkbox checked={formData.clear_path_to_light_exists} onChange={handleCheckboxChange} name="clear_path_to_light_exists" />}
 							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.furniture_out_of_traffic_exists} onChange={handleCheckboxChange} name="furniture_out_of_traffic_exists" />}
 							label="Coffee tables, magazine racks, plant stands, and other furniture pieces are out of high-traffic areas."
-                        />
-                        <FormControlLabel
+						/>
+						<FormControlLabel
 							control={<Checkbox checked={formData.easy_access_main_seating_exists} onChange={handleCheckboxChange} name="easy_access_main_seating_exists" />}
 							label="The main seating is easy to get in and out of."
 						/>
@@ -134,7 +135,7 @@ export default function LivingRoomData() {
 							control={<Checkbox checked={formData.secured_electrical_cords_exists} onChange={handleCheckboxChange} name="secured_electrical_cords_exists" />}
 							label="Electrical cords and other wires are secured out of walking paths."
 						/>
-                        <FormControlLabel
+						<FormControlLabel
 							control={<Checkbox checked={formData.adequate_lighting_exists} onChange={handleCheckboxChange} name="adequate_lighting_exists" />}
 							label="The lighting is adequate for reading and other activities to prevent eye strain."
 						/>

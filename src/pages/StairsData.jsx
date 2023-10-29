@@ -5,13 +5,13 @@ import { insertRoomData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import useQueryParam from '../utils/useQueryParam';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function StairsData() {
-	const {authenticated, userId} = useAuthentication();
+	const { authenticated, userId } = useAuthentication();
 	const houseId = useQueryParam('house_id');
-	const location = useLocation();
+	const navigate = useNavigate();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
 		room_name: '',
@@ -20,12 +20,12 @@ export default function StairsData() {
 		handle_bar_exists: false,
 		room_brightness: 10,
 		clear_path_to_light_exists: false,
-        easy_flashlight_placement_exists: false,
+		easy_flashlight_placement_exists: false,
 		handrails_exists: false,
 		even_steps_exists: false,
 		adequate_lighting_exists: false,
-        clear_of_trip_hazards_exists: false,
-        visible_edges_exists: false
+		clear_of_trip_hazards_exists: false,
+		visible_edges_exists: false
 	});
 
 	// Handler for inputs change
@@ -36,33 +36,34 @@ export default function StairsData() {
 		});
 	};
 
-    // Handler for slider change
+	// Handler for slider change
 	const handleSliderChange = (fieldName) => (event, newValue) => {
 		setFormData((prevFormData) => ({
-		  ...prevFormData,
-		  [fieldName]: newValue,  // dynamic field name
+			...prevFormData,
+			[fieldName]: newValue,  // dynamic field name
 		}));
-	  };
+	};
 
-    // Handler for checkbox change
+	// Handler for checkbox change
 	const handleCheckboxChange = (event) => {
 		const { name, checked } = event.target;
 		setFormData((prevFormData) => {
-			return { ...prevFormData,  ...prevFormData, [name]: checked }
+			return { ...prevFormData, ...prevFormData, [name]: checked }
 		});
 	};
 
-    // Handler for form submission
+	// Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertRoomData(supabase, formData, houseId, 'stairs');
+		insertRoomData(supabase, formData, houseId, 'stairs')
+			.then(res => navigate(`/house?id=${houseId}`));
 	};
 
 
 	// Now we build the form UI
 	return (
 		<Box sx={{ m: 4 }}>
-			
+
 			<form onSubmit={handleSubmit}>
 				<h2>Stairs Info</h2>
 				{/* <br></br> */}
@@ -82,7 +83,7 @@ export default function StairsData() {
 				<br></br>
 				<br></br>
 
-                {/* Mobility Slider */}
+				{/* Mobility Slider */}
 				<Box sx={{ my: 2 }}>
 					<Typography gutterBottom variant="body1">
 						How bright is the stairway?
@@ -117,16 +118,16 @@ export default function StairsData() {
 						<FormControlLabel
 							control={<Checkbox checked={formData.handle_bar_exists} onChange={handleCheckboxChange} name="handle_bar_exists" />}
 							label="There are handlebar/rails that the elderly can hold on to."
-                        />
-                        <FormControlLabel
+						/>
+						<FormControlLabel
 							control={<Checkbox checked={formData.clear_path_to_light_exists} onChange={handleCheckboxChange} name="clear_path_to_light_exists" />}
 							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.handrails_exists} onChange={handleCheckboxChange} name="handrails_exists" />}
 							label="There are handrails on both sides of stairways."
-                        />
-                        <FormControlLabel
+						/>
+						<FormControlLabel
 							control={<Checkbox checked={formData.even_steps_exists} onChange={handleCheckboxChange} name="even_steps_exists" />}
 							label="The steps are even and in good condition, without any loose or broken areas."
 						/>
@@ -134,7 +135,7 @@ export default function StairsData() {
 							control={<Checkbox checked={formData.adequate_lighting_exists} onChange={handleCheckboxChange} name="adequate_lighting_exists" />}
 							label="There is adequate lighting installed for each stairway, and is it easily accessible."
 						/>
-                        <FormControlLabel
+						<FormControlLabel
 							control={<Checkbox checked={formData.clear_of_trip_hazards_exists} onChange={handleCheckboxChange} name="clear_of_trip_hazards_exists" />}
 							label="The staircases are clear of items and potential trip hazards."
 						/>

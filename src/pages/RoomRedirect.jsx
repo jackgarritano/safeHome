@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
 import useAuthentication from "../hooks/useAuthentication";
 import { RadioGroup, Radio } from '@mui/material';
@@ -46,7 +45,7 @@ export default function RoomRedict() {
 				navigate(`/stairsdata?house_id=${houseId}`);
 				break;
 			default:
-				navigate(`/house?house_id=${houseId}`);
+				navigate(`/house?id=${houseId}`);
 		}
 	};
 
