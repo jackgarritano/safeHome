@@ -21,10 +21,8 @@ async function insertOnboardingData(supabase, formData, id){
 
 
 async function insertHouseData(supabase, formData, id){
-	console.log('formdata: ', formData);
 	const {data, error} = await supabase
 		.from('houses')
-		.upsert({id, ...formData})
+		.upsert({user_id: id, ...formData})
 		.select()
-	console.log(error);
 }
