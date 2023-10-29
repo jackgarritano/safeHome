@@ -8,10 +8,10 @@ export default function Onboarding() {
 	const [formData, setFormData] = useState({
 		name: '',
 		age: '',
-		mobility: 0,
+		mobility: 10,
+		eyesight: 10,
+		muscleWeakness: 10,
 		impairments: {
-			eyesight: false,
-			muscleWeakness: false,
 			historyOfFalls: false,
 			assistiveDevices: false,
 			incontinence: false,
@@ -35,11 +35,12 @@ export default function Onboarding() {
 	};
 
 	// Handler for slider change
-	const handleSliderChange = (event, newValue) => {
-		setFormData((prevFormData) => {
-			return { ...prevFormData, mobility: newValue }
-		});
-	};
+	const handleSliderChange = (fieldName) => (event, newValue) => {
+		setFormData((prevFormData) => ({
+		  ...prevFormData,
+		  [fieldName]: newValue,  // dynamic field name
+		}));
+	  };
 
 	// Handler for form submission
 	const handleSubmit = (event) => {
@@ -98,7 +99,7 @@ export default function Onboarding() {
 						max={10}
 						name="mobility"
 						value={formData.mobility}
-						onChange={handleSliderChange}
+						onChange={handleSliderChange('mobility')}
 					/>
 				</Box>
 
@@ -115,8 +116,8 @@ export default function Onboarding() {
 						min={1}
 						max={10}
 						name="eyesight"
-						value={formData.mobility}
-						onChange={handleSliderChange}
+						value={formData.eyesight}
+						onChange={handleSliderChange('eyesight')}
 					/>
 				</Box>
 
@@ -133,8 +134,8 @@ export default function Onboarding() {
 						min={1}
 						max={10}
 						name="strength"
-						value={formData.mobility}
-						onChange={handleSliderChange}
+						value={formData.muscleWeakness}
+						onChange={handleSliderChange('muscleWeakness')}
 					/>
 				</Box>
 
