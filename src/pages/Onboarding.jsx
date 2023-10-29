@@ -52,9 +52,10 @@ export default function Onboarding() {
 	// Now we build the form UI
 	return (
 		<Box sx={{ m: 4 }}>
+			
 			<form onSubmit={handleSubmit}>
 				<h2>Onboarding</h2>
-				<br></br>
+				{/* <br></br> */}
 				<Typography gutterBottom variant="body1">
 					What is your name?
 				</Typography>
