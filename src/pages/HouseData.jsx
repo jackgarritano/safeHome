@@ -106,6 +106,22 @@ export default function HouseData() {
                     <FormControlLabel value="house" control={<Radio />} label="House" />
                 </RadioGroup>
                 </FormControl>
+				<br></br>
+				<br></br>
+				<Typography gutterBottom variant="body1">
+				What extreme temperatures does the area experience? (In Fahrenheit)
+				</Typography>
+				{/* Name Input */}
+				<TextField
+					fullWidth
+					margin="normal"
+					label="Temperature"
+					type="number"
+					variant="outlined"
+					name="temp"
+					value={formData.temp}
+					onChange={handleInputChange}
+				/>
                 <br></br>
 				<br></br>
 				<Typography gutterBottom variant="body1">
@@ -115,7 +131,7 @@ export default function HouseData() {
 				<TextField
 					fullWidth
 					margin="normal"
-					label="Num Floors"
+					label="Number of Floors"
 					type="number"
 					variant="outlined"
 					name="num_floors"
