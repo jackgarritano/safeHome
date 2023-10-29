@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
+import { insertOnboardingData } from '../utils/db';
+import SupabaseContext from '../components/SupabaseContext';
+import useAuthentication from "../hooks/useAuthentication";
 
 
 export default function Onboarding() {
-
-
+	const authenticated = useAuthentication();
+	const location = useLocation();
+	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
 		name: '',
 		age: '',
@@ -17,6 +22,9 @@ export default function Onboarding() {
 			incontinence: false,
 		}
 	});
+
+	const query = new URLSearchParams(location.search);
+	const id = query.get('id');
 
 	// Handler for inputs change
 	const handleInputChange = (event) => {
@@ -45,8 +53,7 @@ export default function Onboarding() {
 	// Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log('Form data:', formData);
-		// Here, you would typically handle form submission, like sending data to a server
+		insertOnboardingData(supabase, formData, id);
 	};
 
 	// Now we build the form UI

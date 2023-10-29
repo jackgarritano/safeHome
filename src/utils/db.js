@@ -1,4 +1,4 @@
-
+export {insertOnboardingData};
 
 async function insertOnboardingData(supabase, formData, id){
 	const upsertData = {
