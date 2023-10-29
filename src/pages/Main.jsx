@@ -1,8 +1,8 @@
 import useAuthentication from "../hooks/useAuthentication";
 import HouseCard from "../components/HouseCard";
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Button } from '@mui/material';
 import { getAllHouses, getUserData } from "../utils/db";
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import SupabaseContext from '../components/SupabaseContext';
 import {
 	generateBathroomRecs,
@@ -12,102 +12,52 @@ import {
 	generateLivingRoomRecs,
 	generateStairsRecs
 } from '../utils/recommendations.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
 	const { authenticated, userId } = useAuthentication();
+	const navigate = useNavigate();
 	const supabase = useContext(SupabaseContext);
-
-	const houses = [];
+	const [houses, setHouses] = useState([]);
 
 	useEffect(() => {
-		// getUserData(supabase, userId)
-		// 				.then(userData => console.log(userData))
-		// getAllHouses(supabase, userId)
-		// 				.then(userData => console.log(userData))
-
-
-		/*
-			0
-: 
-bathrooms
-: 
-[{…}]
-bedrooms
-: 
-(3) [{…}, {…}, {…}]
-house_name
-: 
-"myhouse"
-id
-: 
-"545e85c1-ab33-496b-92cb-80f1145addfa"
-kitchens
-: 
-(2) [{…}, {…}]
-living_rooms
-: 
-[{…}]
-num_elderly
-: 
-2
-num_floors
-: 
-1
-num_people
-: 
-3
-stairs
-: 
-(2) [{…}, {…}]
-temp
-: 
-2
-type_house
-: 
-"house"
-user_id
-: 
-"21080eec-2821-4410-9620-34d867f296ad"
-		*/
-
-
 		if (userId) {
 			getAllHouses(supabase, userId)
 				.then(returnedHouses => {
 					getUserData(supabase, userId)
 						.then(userData => {
-							console.log('rethouses', returnedHouses);
 							for (let house of returnedHouses) {
 								let tempRecs = []
 								console.log('type of house bathrooms', typeof house['bathrooms']);
-								for(let brm of house['bathrooms']){
-									tempRecs.concat(generateBathroomRecs(userData, house, brm))
+								for (let brm of house['bathrooms']) {
+									const bathroomRecs = generateBathroomRecs(userData, house, brm);
+									tempRecs = tempRecs.concat(bathroomRecs);
 								}
-								for(let bdrm of house['bedrooms']){
-									tempRecs.concat(generateBedroomRecs(userData, house, bdrm))
+								for (let bdrm of house['bedrooms']) {
+									const bdrmRecs = generateBedroomRecs(userData, house, bdrm);
+									tempRecs = tempRecs.concat(bdrmRecs);
 								}
-								tempRecs.concat(generateHouseRecs(userData, house));
-								for(let ktch of house['kitchens']){
-									tempRecs.concat(generateKitchenRecs(userData, house, ktch));
+								tempRecs = tempRecs.concat(generateHouseRecs(userData, house));
+								for (let ktch of house['kitchens']) {
+									const kitchenRecs = generateKitchenRecs(userData, house, ktch);
+									tempRecs = tempRecs.concat(kitchenRecs);
 								}
-								for(let lvrm of house['living_rooms']){
-									tempRecs.concat(generateLivingRoomRecs(userData, house, lvrm));
+								for (let lvrm of house['living_rooms']) {
+									const lvrmRecs = generateLivingRoomRecs(userData, house, lvrm);
+									tempRecs = tempRecs.concat(lvrmRecs);
 								}
-								for(let stair of house['stairs']){
-									tempRecs.concat(generateStairsRecs(userData, house, stair));
+								for (let stair of house['stairs']) {
+									const stairRecs = generateStairsRecs(userData, house, stair);
+									tempRecs = tempRecs.concat(stairRecs);
 								}
 								const recSet = new Set(tempRecs);
-								houses.push(
-									{
-										recs: recSet.size,
-										name: house['house_name'],
-										id: house['id']
-									}
-								);
+								setHouses((prevHouses) => [...prevHouses, {
+									recs: recSet.size,
+									name: house['house_name'],
+									id: house['id']
+								}]);
 							}
 						})
-
-
 				})
 			console.log('houses after manipulation: ', houses);
 		}
@@ -121,17 +71,13 @@ user_id
 		flexDirection: 'column'
 	};
 
-
-	// for (let i = 0; i < 10; ++i) {
-	// 	houses.push({
-	// 		name: i % 3 == 0 ? "Jack's House" : i,
-	// 		rooms: 3,
-	// 	})
-	// }
-
 	return <>
 		<Container style={containerStyles}>
 			<h2>Your Houses</h2>
+			<br></br>
+			<Button variant="contained" color="primary" onClick={() => navigate(`/housedata`)}>
+				Add House
+			</Button>
 			<br></br>
 			<Grid container spacing={3}>
 				{houses.map((house, index) => (

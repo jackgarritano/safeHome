@@ -8,10 +8,10 @@ export default function RoomCard({ roomName, safetyScore, roomId }){
 	}
 
 	let scoreColor = 'red'; // Default to red for low scores
-	if (safetyScore >= 7) {
-		scoreColor = 'green';
-	} else if (safetyScore >= 4) {
+	if (safetyScore <= 12 && safetyScore > 6) {
 		scoreColor = '#D1A00C';
+	} else if (safetyScore <= 6) {
+		scoreColor = 'green';
 	}
 
 	return (

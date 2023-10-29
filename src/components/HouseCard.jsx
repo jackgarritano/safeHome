@@ -8,10 +8,10 @@ export default function HouseCard({ houseName, safetyScore, houseId }){
 	}
 
 	let scoreColor = 'red'; // Default to red for low scores
-	if (safetyScore >= 7) {
-		scoreColor = 'green';
-	} else if (safetyScore >= 4) {
+	if (safetyScore <= 20 && safetyScore > 10) {
 		scoreColor = '#D1A00C';
+	} else if (safetyScore <= 10) {
+		scoreColor = 'green';
 	}
 	return (
 		<Card sx={{ maxWidth: 345 }}>
