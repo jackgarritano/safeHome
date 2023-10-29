@@ -8,23 +8,21 @@ import useAuthentication from "../hooks/useAuthentication";
 
 
 
-export default function HouseData() {
+export default function KitchenData() {
 	const {authenticated, userId} = useAuthentication();
 	const location = useLocation();
 	const supabase = useContext(SupabaseContext);
 	const [formData, setFormData] = useState({
-		name: '',
+		room_name: '',
 		trip_item_exists: false,
 		sharp_corner_exists: false,
 		handle_bar_exists: false,
 		room_brightness: 10,
 		clear_path_to_light_exists: false,
         easy_flashlight_placement_exists: false,
-		lamp_within_reach_exists: false,
-		lit_bed_to_bath_exists: false,
-		secured_carpets_exists: false,
-		bed_telephone_access_exists: false,
-		trip_bed_to_bath_exists: false
+		reachable_kitchen_items_exists: false,
+		reachable_extinguisher_exists: false,
+		nonslip_rugs_exists: false,
 	});
 
 	// Handler for inputs change
@@ -63,7 +61,7 @@ export default function HouseData() {
 		<Box sx={{ m: 4 }}>
 			
 			<form onSubmit={handleSubmit}>
-				<h2>Bedroom Info</h2>
+				<h2>Kitchen Info</h2>
 				{/* <br></br> */}
 				<Typography gutterBottom variant="body1">
 					What is this room name?
@@ -74,8 +72,8 @@ export default function HouseData() {
 					margin="normal"
 					label="Room Name"
 					variant="outlined"
-					name="name"
-					value={formData.name}
+					name="room_name"
+					value={formData.room_name}
 					onChange={handleInputChange}
 				/>
 				<br></br>
@@ -126,21 +124,17 @@ export default function HouseData() {
 							label="There is a lamp within reach of your bed in case you need to get up in the middle of the night."
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.lamp_within_reach_exists} onChange={handleCheckboxChange} name="lamp_within_reach_exists" />}
-							label="The path from the bed to the bathroom is well-lit for safe navigation at night."
+							control={<Checkbox checked={formData.reachable_kitchen_items_exists} onChange={handleCheckboxChange} name="reachable_kitchen_items_exists" />}
+							label="All kitchen items used regularly are within easy reach."
                         />
                         <FormControlLabel
-							control={<Checkbox checked={formData.lit_bed_to_bath_exists} onChange={handleCheckboxChange} name="lit_bed_to_bath_exists" />}
-							label="All carpets and area rugs are secured to the floor to prevent slips or trips."
+							control={<Checkbox checked={formData.reachable_extinguisher_exists} onChange={handleCheckboxChange} name="reachable_extinguisher_exists" />}
+							label="There is a fire extinguisher easily accessible in case of a fire."
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.secured_carpets_exists} onChange={handleCheckboxChange} name="secured_carpets_exists" />}
-							label="There is a telephone accessible from the bed in case of emergencies."
+							control={<Checkbox checked={formData.nonslip_rugs_exists} onChange={handleCheckboxChange} name="nonslip_rugs_exists" />}
+							label="The floors are designed with non-slip material or properly secured rugs."
 						/>
-						<FormControlLabel
-							control={<Checkbox checked={formData.bed_telephone_access_exists} onChange={handleCheckboxChange} name="bed_telephone_access_exists" />}
-							label="There are trip hazards between the bed and the bathroom or closet."
-                        />
 					</FormGroup>
 				</FormControl>
 
