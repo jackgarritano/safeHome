@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import App from './App.jsx';
 import HouseData from './pages/HouseData.jsx';
+import House from './pages/House.jsx';
 import Onboarding from './pages/Onboarding.jsx';
 import Auth from './pages/Auth.jsx';
 import Main from './pages/Main.jsx';
@@ -30,10 +31,10 @@ const router = createBrowserRouter([
 		path: "main",
 		element: <Main />,
 	},
-	// {
-	// 	path: "house",
-	// 	element: <House />,
-	// },
+	{
+		path: "house",
+		element: <House />,
+	},
 	// {
 	// 	path: "room",
 	// 	element: <Room />,

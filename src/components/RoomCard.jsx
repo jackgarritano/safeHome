@@ -1,10 +1,17 @@
 import { CardActionArea, CardContent, Card, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const RoomCard = ({ houseName, safetyScore, houseId }) => {
+export default function RoomCard({ roomName, safetyScore, roomId }){
 	const navigate = useNavigate();
-	function navigateToHouse(){
-		navigate(`/house?id=${houseId}`);
+	function navigateToHouse() {
+		navigate(`/room?id=${roomId}`);
+	}
+
+	let scoreColor = 'red'; // Default to red for low scores
+	if (safetyScore >= 7) {
+		scoreColor = 'green';
+	} else if (safetyScore >= 4) {
+		scoreColor = '#D1A00C';
 	}
 
 	return (
@@ -12,9 +19,9 @@ const RoomCard = ({ houseName, safetyScore, houseId }) => {
 			<CardActionArea onClick={navigateToHouse}>
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="div">
-						{houseName}
+						{roomName}
 					</Typography>
-					<Typography variant="body2" color="text.secondary">
+					<Typography variant="body2" sx={{ color: scoreColor }}>
 						Room safety score: {safetyScore}
 					</Typography>
 				</CardContent>
@@ -22,5 +29,3 @@ const RoomCard = ({ houseName, safetyScore, houseId }) => {
 		</Card>
 	);
 };
-
-export default HouseCard;
