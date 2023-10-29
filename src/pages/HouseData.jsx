@@ -43,7 +43,7 @@ export default function HouseData() {
 			
 			<form onSubmit={handleSubmit}>
 				<h2>House Info</h2>
-				{/* <br></br> */}
+				<br></br>
 				<Typography gutterBottom variant="body1">
 					What is your House name?
 				</Typography>
