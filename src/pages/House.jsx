@@ -113,6 +113,7 @@ export default function House() {
 							roomName={room.name}
 							safetyScore={room.recs}
 							roomId={room.id}
+							houseId={houseId}
 						/>
 					</Grid>
 				))}

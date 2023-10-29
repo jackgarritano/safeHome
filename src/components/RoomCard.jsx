@@ -1,10 +1,10 @@
 import { CardActionArea, CardContent, Card, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export default function RoomCard({ roomName, safetyScore, roomId }){
+export default function RoomCard({ roomName, safetyScore, roomId, houseId }){
 	const navigate = useNavigate();
 	function navigateToHouse() {
-		navigate(`/room?id=${roomId}`);
+		navigate(`/room?id=${roomId}&house_id=${houseId}`);
 	}
 
 	let scoreColor = 'red'; // Default to red for low scores

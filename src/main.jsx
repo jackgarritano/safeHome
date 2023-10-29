@@ -17,6 +17,7 @@ import StairsData from './pages/StairsData.jsx';
 import RoomRedict from './pages/RoomRedirect.jsx';
 import Auth from './pages/Auth.jsx';
 import Main from './pages/Main.jsx';
+import Room from './pages/Room.jsx';
 import SupabaseContext, {supabase} from './components/SupabaseContext.jsx';
 import './index.css'
 import '@fontsource/roboto/300.css';
@@ -41,10 +42,10 @@ const router = createBrowserRouter([
 		path: "house",
 		element: <House />,
 	},
-	// {
-	// 	path: "room",
-	// 	element: <Room />,
-	// },
+	{
+		path: "room",
+		element: <Room />,
+	},
 	{
 		path: "onboarding",
 		element: <Onboarding />,
