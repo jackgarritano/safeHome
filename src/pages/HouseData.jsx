@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography, FormControl, FormControlLabel, FormLabel, Checkbox, TextField, Slider, FormGroup, Button, Box } from '@mui/material';
-// import { insertHouseData } from '../utils/db';
+import { insertHouseData } from '../utils/db';
 import SupabaseContext from '../components/SupabaseContext';
 import useAuthentication from "../hooks/useAuthentication";
 import { RadioGroup, Radio } from '@mui/material';
@@ -17,7 +17,7 @@ export default function HouseData() {
 		house_name: '',
 		num_people: '',
 		num_elderly: '',
-		type_house: '', // fix this type
+		type_house: '',
 		temp: '',
 		num_floors: ''
 	});
@@ -33,7 +33,7 @@ export default function HouseData() {
     // Handler for form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		insertOnboardingData(supabase, formData, userId);
+		insertHouseData(supabase, formData, userId);
 	};
 
 
