@@ -1,9 +1,12 @@
 import useAuthentication from "../hooks/useAuthentication";
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Button } from '@mui/material';
 import RoomCard from "../components/RoomCard";
+import useQueryParam from '../utils/useQueryParam';
+import { useNavigate } from 'react-router-dom';
 
 export default function House() {
 	const { authenticated } = useAuthentication();
+	const houseId = useQueryParam('id');
 
 	const containerStyles = {
 		minHeight: '100%', // covers the full height of its parent, you can also use '100vh' for full viewport height
@@ -11,7 +14,7 @@ export default function House() {
 		alignItems: 'center', // centers children vertically in this container
 		justifyContent: 'center', // centers children horizontally in this container
 		flexDirection: 'column'
-	  };
+	};
 
 	const rooms = [];
 	for (let i = 0; i < 10; ++i) {
@@ -27,6 +30,10 @@ export default function House() {
 	return <>
 		<Container style={containerStyles}>
 			<h2>Your Rooms</h2>
+			<br></br>
+			<Button variant="contained" color="primary" onClick={() => navigate(`/roomredirect?id=${houseId}`)}>
+				Add Room
+			</Button>
 			<br></br>
 			<Grid container spacing={3}>
 				{rooms.map((room, index) => (

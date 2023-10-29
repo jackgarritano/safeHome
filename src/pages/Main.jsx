@@ -7,14 +7,15 @@ import SupabaseContext from '../components/SupabaseContext';
 
 export default function Main() {
 	const { authenticated, userId } = useAuthentication();
-	// const supabase = useContext(SupabaseContext);
+	const supabase = useContext(SupabaseContext);
+	console.log(userId);
 
-	// useEffect(() => {
-	// 	getAllHouses(supabase, userId)
-	// 		.then(res => {
-	// 			console.log('resp', res);
-	// 		})
-	// }, [])
+	useEffect(() => {
+		getAllHouses(supabase, userId)
+			.then(res => {
+				console.log('resp', res);
+			})
+	}, [])
 
 	const containerStyles = {
 		minHeight: '100%', // covers the full height of its parent, you can also use '100vh' for full viewport height
