@@ -8,12 +8,12 @@ export default function Onboarding() {
 	const [formData, setFormData] = useState({
 		name: '',
 		age: '',
-		mobility: 10,
+		mobility_level: 10,
 		eyesight: 10,
-		muscleWeakness: 10,
+		muscle_strength: 10,
 		impairments: {
-			historyOfFalls: false,
-			assistiveDevices: false,
+			past_fall_history: false,
+			assistive_devices_usage: false,
 			incontinence: false,
 		}
 	});
@@ -97,9 +97,9 @@ export default function Onboarding() {
 						marks
 						min={1}
 						max={10}
-						name="mobility"
-						value={formData.mobility}
-						onChange={handleSliderChange('mobility')}
+						name="mobility_level"
+						value={formData.mobility_level}
+						onChange={handleSliderChange('mobility_level')}
 					/>
 				</Box>
 
@@ -134,8 +134,8 @@ export default function Onboarding() {
 						min={1}
 						max={10}
 						name="strength"
-						value={formData.muscleWeakness}
-						onChange={handleSliderChange('muscleWeakness')}
+						value={formData.muscle_strength}
+						onChange={handleSliderChange('muscle_strength')}
 					/>
 				</Box>
 
@@ -150,15 +150,15 @@ export default function Onboarding() {
 							label="Impaired Eyesight"
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.impairments.muscleWeakness} onChange={handleCheckboxChange} name="muscleWeakness" />}
+							control={<Checkbox checked={formData.impairments.muscle_strength} onChange={handleCheckboxChange} name="muscle_strength" />}
 							label="Muscle weakness or atrophy"
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.impairments.historyOfFalls} onChange={handleCheckboxChange} name="historyOfFalls" />}
+							control={<Checkbox checked={formData.impairments.past_fall_history} onChange={handleCheckboxChange} name="past_fall_history" />}
 							label="History of past falls"
 						/>
 						<FormControlLabel
-							control={<Checkbox checked={formData.impairments.assistiveDevices} onChange={handleCheckboxChange} name="assistiveDevices" />}
+							control={<Checkbox checked={formData.impairments.assistive_devices_usage} onChange={handleCheckboxChange} name="assistive_devices_usage" />}
 							label="Use of assistive devices"
 						/>
 						<FormControlLabel
