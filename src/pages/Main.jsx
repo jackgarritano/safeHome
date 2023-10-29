@@ -1,9 +1,20 @@
 import useAuthentication from "../hooks/useAuthentication";
 import HouseCard from "../components/HouseCard";
 import { Container, Grid } from '@mui/material';
+import { getAllHouses } from "../utils/db";
+import { useEffect, useContext } from "react";
+import SupabaseContext from '../components/SupabaseContext';
 
 export default function Main() {
-	const { authenticated } = useAuthentication();
+	const { authenticated, userId } = useAuthentication();
+	// const supabase = useContext(SupabaseContext);
+
+	// useEffect(() => {
+	// 	getAllHouses(supabase, userId)
+	// 		.then(res => {
+	// 			console.log('resp', res);
+	// 		})
+	// }, [])
 
 	const containerStyles = {
 		minHeight: '100%', // covers the full height of its parent, you can also use '100vh' for full viewport height

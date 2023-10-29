@@ -1,4 +1,4 @@
-export { insertOnboardingData, insertHouseData, insertRoomData };
+export { insertOnboardingData, insertHouseData, insertRoomData, getAllHouses };
 
 async function insertOnboardingData(supabase, formData, id) {
 	const upsertData = {
@@ -50,7 +50,9 @@ async function getAllHouses(supabase, user_id) {
 			bedrooms (*),
 			kitchens (*),
 			living_rooms (*),
-			stairs (*),
+			stairs (*)
 		`)
 		.eq('user_id', user_id)
+	console.log('error', error);
+	return data;
 }
