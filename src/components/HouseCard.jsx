@@ -1,7 +1,7 @@
 import { CardActionArea, CardContent, Card, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const HouseCard = ({ houseName, numberOfRooms, houseId }) => {
+const HouseCard = ({ houseName, safetyScore, houseId }) => {
 	const navigate = useNavigate();
 	function navigateToHouse(){
 		navigate(`/house?id=${houseId}`);
@@ -15,7 +15,7 @@ const HouseCard = ({ houseName, numberOfRooms, houseId }) => {
 						{houseName}
 					</Typography>
 					<Typography variant="body2" color="text.secondary">
-						Number of rooms: {numberOfRooms}
+						House safety score: {safetyScore}
 					</Typography>
 				</CardContent>
 			</CardActionArea>
