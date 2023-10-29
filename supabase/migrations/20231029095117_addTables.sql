@@ -11,7 +11,8 @@ create table "public"."bathrooms" (
     "raised_toilet_exists" boolean not null,
     "support_bars_exists" boolean not null,
     "regulated_water_temp_exists" boolean not null,
-    "adequate_ventilation_exists" boolean not null
+    "adequate_ventilation_exists" boolean not null,
+    "room_name" text not null
 );
 
 
@@ -30,7 +31,8 @@ create table "public"."bedrooms" (
     "lit_bed_to_bath_exists" boolean not null,
     "secured_carpets_exists" boolean not null,
     "bed_telephone_access_exists" boolean not null,
-    "trip_bed_to_bath_exists" boolean not null
+    "trip_bed_to_bath_exists" boolean not null,
+    "room_name" text not null
 );
 
 
@@ -61,7 +63,8 @@ create table "public"."kitchens" (
     "easy_flashlight_placement_exists" boolean not null,
     "reachable_kitchen_items_exists" boolean not null,
     "reachable_extinguisher_exists" boolean not null,
-    "nonslip_rugs_exists" boolean not null
+    "nonslip_rugs_exists" boolean not null,
+    "room_name" text not null
 );
 
 
@@ -80,7 +83,8 @@ create table "public"."living_rooms" (
     "easy_access_main_seating_exists" boolean not null,
     "secured_electrical_cords_exists" boolean not null,
     "adequate_lighting_exists" boolean not null,
-    "clutter_lead_to_fall_exists" boolean not null
+    "clutter_lead_to_fall_exists" boolean not null,
+    "room_name" text not null
 );
 
 
@@ -99,7 +103,8 @@ create table "public"."stairs" (
     "even_steps_exists" boolean not null,
     "adequate_lighting_exists" boolean not null,
     "clear_of_trip_hazards_exists" boolean not null,
-    "visible_edges_exists" boolean not null
+    "visible_edges_exists" boolean not null,
+    "room_name" text not null
 );
 
 
