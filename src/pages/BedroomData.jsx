@@ -8,7 +8,7 @@ import useAuthentication from "../hooks/useAuthentication";
 
 
 
-export default function HouseData() {
+export default function BedroomData() {
 	const {authenticated, userId} = useAuthentication();
 	const location = useLocation();
 	const supabase = useContext(SupabaseContext);
