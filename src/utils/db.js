@@ -1,4 +1,4 @@
-export { insertOnboardingData, insertHouseData };
+export { insertOnboardingData, insertHouseData, insertBedroomData };
 
 async function insertOnboardingData(supabase, formData, id) {
 	const upsertData = {
@@ -25,6 +25,14 @@ async function insertHouseData(supabase, formData, id) {
 		.from('houses')
 		.upsert({ user_id: id, ...formData })
 		.select()
+}
+
+async function insertBedroomData(supabase, formData, id) {
+	const { data, error } = await supabase
+		.from('bedrooms')
+		.upsert({ house_id: id, ...formData })
+		.select()
+	console.log('error', error);
 }
 
 
