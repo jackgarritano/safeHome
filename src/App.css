@@ -1,4 +1,4 @@
-html, body, #root {
+/* html, body, #root {
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -6,9 +6,27 @@ html, body, #root {
   display:flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 .loginModal {
 	width: 50%;
 	height: 50%;
+} */
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0; /* Removed 'auto' to avoid centering */
+  text-align: center;
+  display: block; /* Changed from 'flex' to 'block' to stack content */
+  /* Removed justify-content and align-items since they're not needed with 'display: block' */
+  overflow: auto; /* Allows scrolling if content exceeds the viewport height */
+}
+
+/* Adjust your .loginModal class if necessary */
+.loginModal {
+  width: 50%;
+  height: 50%;
+  /* You can add more styles here depending on how you want to position the modal */
 }
