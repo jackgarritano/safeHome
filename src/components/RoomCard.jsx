@@ -22,7 +22,7 @@ export default function RoomCard({ roomName, safetyScore, roomId }){
 						{roomName}
 					</Typography>
 					<Typography variant="body2" sx={{ color: scoreColor }}>
-						Room safety score: {safetyScore}
+						Number of recommendations: {safetyScore}
 					</Typography>
 				</CardContent>
 			</CardActionArea>

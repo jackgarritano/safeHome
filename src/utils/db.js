@@ -1,4 +1,4 @@
-export { insertOnboardingData, insertHouseData, insertRoomData, getAllHouses };
+export { insertOnboardingData, insertHouseData, insertRoomData, getAllHouses, getUserData, };
 
 async function insertOnboardingData(supabase, formData, id) {
 	const upsertData = {
@@ -53,6 +53,15 @@ async function getAllHouses(supabase, user_id) {
 			stairs (*)
 		`)
 		.eq('user_id', user_id)
+	console.log('error', error);
+	return data;
+}
+
+async function getUserData(supabase, user_id){
+	const {data, error} = await supabase
+		.from('user_info')
+		.select('*')
+		.eq('id', user_id)
 	console.log('error', error);
 	return data;
 }

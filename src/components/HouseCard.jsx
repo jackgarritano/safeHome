@@ -21,7 +21,7 @@ export default function HouseCard({ houseName, safetyScore, houseId }){
 						{houseName}
 					</Typography>
 					<Typography variant="body2" sx={{ color: scoreColor }}>
-						House safety score: {safetyScore}
+						Number of recommendations: {safetyScore}
 					</Typography>
 				</CardContent>
 			</CardActionArea>
