@@ -146,14 +146,6 @@ export default function Onboarding() {
 					</Typography>
 					<FormGroup>
 						<FormControlLabel
-							control={<Checkbox checked={formData.impairments.eyesight} onChange={handleCheckboxChange} name="eyesight" />}
-							label="Impaired Eyesight"
-						/>
-						<FormControlLabel
-							control={<Checkbox checked={formData.impairments.muscle_strength} onChange={handleCheckboxChange} name="muscle_strength" />}
-							label="Muscle weakness or atrophy"
-						/>
-						<FormControlLabel
 							control={<Checkbox checked={formData.impairments.past_fall_history} onChange={handleCheckboxChange} name="past_fall_history" />}
 							label="History of past falls"
 						/>
