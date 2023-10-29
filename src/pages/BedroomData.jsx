@@ -17,7 +17,7 @@ export default function HouseData() {
 		trip_item_exists: false,
 		sharp_corner_exists: false,
 		handle_bar_exists: false,
-		room_brightness: '',
+		room_brightness: 10,
 		clear_path_to_light_exists: false,
         easy_flashlight_placement_exists: false,
 		lamp_within_reach_exists: false,
@@ -35,11 +35,19 @@ export default function HouseData() {
 		});
 	};
 
+    // Handler for slider change
+	const handleSliderChange = (fieldName) => (event, newValue) => {
+		setFormData((prevFormData) => ({
+		  ...prevFormData,
+		  [fieldName]: newValue,  // dynamic field name
+		}));
+	  };
+
     // Handler for checkbox change
 	const handleCheckboxChange = (event) => {
 		const { name, checked } = event.target;
 		setFormData((prevFormData) => {
-			return { ...prevFormData, impairments: { ...prevFormData.impairments, [name]: checked } }
+			return { ...prevFormData,  ...prevFormData, [name]: checked }
 		});
 	};
 
@@ -72,52 +80,67 @@ export default function HouseData() {
 				/>
 				<br></br>
 				<br></br>
+
+                {/* Mobility Slider */}
+				<Box sx={{ my: 2 }}>
+					<Typography gutterBottom variant="body1">
+						How bright is the room?
+					</Typography>
+					<Slider
+						aria-label="Room Brightness"
+						valueLabelDisplay="auto"
+						step={1}
+						marks
+						min={1}
+						max={10}
+						name="room_brightness"
+						value={formData.room_brightness}
+						onChange={handleSliderChange('room_brightness')}
+					/>
+				</Box>
+
 				{/* Impairments Checkboxes */}
 				<FormControl component="fieldset" margin="normal">
 					<Typography gutterBottom variant="body1">
-						Check all boxes that apply to the current room.
+						Check the boxes for the statements that are true for your current room.
 					</Typography>
 					<FormGroup>
 						<FormControlLabel
 							control={<Checkbox checked={formData.trip_item_exists} onChange={handleCheckboxChange} name="trip_item_exists" />}
-							label="History of past falls"
+							label="There are items that could potentially come loose and cause tripping."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.sharp_corner_exists} onChange={handleCheckboxChange} name="sharp_corner_exists" />}
-							label="Use of assistive devices"
+							label="There are sharp corners that could cause harm when tripping."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.handle_bar_exists} onChange={handleCheckboxChange} name="handle_bar_exists" />}
-							label="Incontinence"
+							label="There are handlebar/rails that the elderly can hold on to."
                         />
                         <FormControlLabel
 							control={<Checkbox checked={formData.clear_path_to_light_exists} onChange={handleCheckboxChange} name="clear_path_to_light_exists" />}
-							label="History of past falls"
+							label="The flashlights are in easy-to-find places in case of power outages."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.easy_flashlight_placement_exists} onChange={handleCheckboxChange} name="easy_flashlight_placement_exists" />}
-							label="Use of assistive devices"
+							label="There is a lamp within reach of your bed in case you need to get up in the middle of the night."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.lamp_within_reach_exists} onChange={handleCheckboxChange} name="lamp_within_reach_exists" />}
-							label="Incontinence"
+							label="The path from the bed to the bathroom is well-lit for safe navigation at night."
                         />
                         <FormControlLabel
 							control={<Checkbox checked={formData.lit_bed_to_bath_exists} onChange={handleCheckboxChange} name="lit_bed_to_bath_exists" />}
-							label="History of past falls"
+							label="All carpets and area rugs are secured to the floor to prevent slips or trips."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.secured_carpets_exists} onChange={handleCheckboxChange} name="secured_carpets_exists" />}
-							label="Use of assistive devices"
+							label="There is a telephone accessible from the bed in case of emergencies."
 						/>
 						<FormControlLabel
 							control={<Checkbox checked={formData.bed_telephone_access_exists} onChange={handleCheckboxChange} name="bed_telephone_access_exists" />}
-							label="Incontinence"
+							label="There are trip hazards between the bed and the bathroom or closet."
                         />
-                        <FormControlLabel
-							control={<Checkbox checked={formData.trip_bed_to_bath_exists} onChange={handleCheckboxChange} name="trip_bed_to_bath_exists" />}
-							label="History of past falls"
-						/>
 					</FormGroup>
 				</FormControl>
 
